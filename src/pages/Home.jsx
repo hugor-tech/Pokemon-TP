@@ -11,6 +11,7 @@ function Home() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [hasNext, setHasNext] = useState(true)
+  const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
     setLoading(true)
@@ -37,9 +38,30 @@ function Home() {
     if (hasNext) setPage(page + 1)
   }
 
+  const filteredPokemons = pokemons.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
   return (
     <div>
       <h1>Pokédex</h1>
+      <div style={{ marginBottom: '20px' }}>
+        <input
+          type="text"
+          placeholder="Rechercher un Pokémon..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{
+            padding: '8px 12px',
+            fontSize: '16px',
+            width: '100%',
+            maxWidth: '300px',
+            borderRadius: '4px',
+            border: '1px solid #ccc'
+          }}
+        />
+      </div>
+
       {loading && <p>Chargement...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {!loading && !error && pokemons.length === 0 && <p>Aucun Pokémon trouvé.</p>}
