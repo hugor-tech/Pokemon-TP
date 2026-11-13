@@ -64,10 +64,13 @@ function Home() {
 
       {loading && <p>Chargement...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {!loading && !error && pokemons.length === 0 && <p>Aucun Pokémon trouvé.</p>}
+      
+      {/* CORRECTION ICI : on vérifie filteredPokemons au lieu de pokemons */}
+      {!loading && !error && filteredPokemons.length === 0 && <p>Aucun Pokémon trouvé.</p>}
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 15 }}>
-        {pokemons.map((pokemon) => (
+        {/* CORRECTION ICI : on mappe sur filteredPokemons */}
+        {filteredPokemons.map((pokemon) => (
           <PokeCard key={pokemon.name} pokemon={pokemon} />
         ))}
       </div>
