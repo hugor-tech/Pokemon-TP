@@ -8,8 +8,7 @@ function App() {
     <>
       <nav style={{ padding: '1rem', display: 'flex', gap: '1rem' }}>
         <Link to="/">Home</Link>
-        {/* Exemple d'un lien direct vers un Pokémon spécifique (ex: Bulbizarre ID 1) */}
-        <Link to="/poke/1">Exemple Pokemon #1</Link>
+        <Link to="/poke/:id">pokemon ID</Link>
       </nav>
 
       <Routes>
