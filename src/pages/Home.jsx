@@ -12,7 +12,6 @@ function Home() {
   const [error, setError] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
 
-  // 1. Charger tous les noms de Pokémon une seule fois au montage
   useEffect(() => {
     setLoading(true)
     setError(null)
@@ -28,18 +27,15 @@ function Home() {
       })
   }, [])
 
-  // 2. Filtrer sur l'ensemble des Pokémon
   const filteredPokemons = allPokemons.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(searchTerm.toLowerCase().trim())
   )
 
-  // 3. Calculer la pagination sur la liste filtrée
   const totalPages = Math.ceil(filteredPokemons.length / LIMIT)
   const hasNext = page < totalPages
   const startIndex = (page - 1) * LIMIT
   const paginatedPokemons = filteredPokemons.slice(startIndex, startIndex + LIMIT)
 
-  // Réinitialiser à la page 1 dès que l'utilisateur modifie sa recherche
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value)
     setPage(1)
@@ -72,7 +68,6 @@ function Home() {
             border: '1px solid #ccc'
           }}
         />
-        {/* Suggestions natives du navigateur basées sur les lettres tapées */}
         {searchTerm.trim().length > 0 && (
           <datalist id="pokemon-suggestions">
             {filteredPokemons.slice(0, 10).map((pokemon) => (
