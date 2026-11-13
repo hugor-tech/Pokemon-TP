@@ -10,8 +10,6 @@ function PokeDetails() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  const MAX_POKEMON = 1025 // Limite max du Pokédex national
-
   useEffect(() => {
     setLoading(true)
     setError(null)
@@ -31,13 +29,13 @@ function PokeDetails() {
   if (error) return <p style={{ color: 'red' }}>{error}</p>
   if (!pokemon) return null
 
-  // Calcul des IDs avec les limites 1 et 1025
+  // Calcul des IDs pour les boutons Précédent / Suivant (bloqué à 1 pour le minimum)
   const prevId = numericId > 1 ? numericId - 1 : null
-  const nextId = numericId < MAX_POKEMON ? numericId + 1 : null
+  const nextId = numericId + 1
 
   return (
     <div>
-      {/* Navigation Précédent / Suivant sécurisée */}
+      {/* Navigation Précédent / Suivant */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
         {prevId ? (
           <Link to={`/poke/${prevId}`}>◄ Précédent (# {prevId})</Link>
@@ -45,9 +43,7 @@ function PokeDetails() {
         
         <Link to="/">Retour à l'accueil</Link>
         
-        {nextId ? (
-          <Link to={`/poke/${nextId}`}>Suivant (# {nextId}) ►</Link>
-        ) : <span />}
+        <Link to={`/poke/${nextId}`}>Suivant (# {nextId}) ►</Link>
       </div>
 
       <h1 style={{ textTransform: 'capitalize' }}>{pokemon.name} (# {pokemon.id})</h1>
@@ -67,7 +63,7 @@ function PokeDetails() {
         ))}
       </ul>
 
-      {/* Affichage du Moveset */}
+      {/* Affichage du Moveset (limité aux 10 premiers pour ne pas surcharger la page) */}
       <h2>Capacités (Moveset)</h2>
       <ul>
         {pokemon.moves.slice(0, 10).map((m) => (
