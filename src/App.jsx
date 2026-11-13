@@ -6,8 +6,11 @@ import './App.css'
 function App() {
   return (
     <>
-      <Link to="/">Home</Link>
-      <Link to="/poke/:id">PokemonDetails</Link>
+      <nav style={{ padding: '1rem', display: 'flex', gap: '1rem' }}>
+        <Link to="/">Home</Link>
+        {/* Exemple d'un lien direct vers un Pokémon spécifique (ex: Bulbizarre ID 1) */}
+        <Link to="/poke/1">Exemple Pokemon #1</Link>
+      </nav>
 
       <Routes>
         <Route path="/" element={<Home/>}/>
