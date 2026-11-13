@@ -10,6 +10,8 @@ function PokeDetails() {
 
   useEffect(() => {
     setLoading(true)
+    setError(null)
+    
     api.get(`/pokemon/${id}`)
       .then((res) => {
         setPokemon(res.data)
